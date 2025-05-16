@@ -1,0 +1,2 @@
+This is a test file created for the Emacs MCP Server.
+If you can see this file in Emacs, the communication is working!

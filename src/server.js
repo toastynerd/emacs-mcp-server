@@ -115,15 +115,23 @@ module.exports = app;
 
 // Only start the server if this file is run directly
 if (require.main === module) {
-  const server = app.listen(PORT, () => {
-    console.log(`MCP server listening on port ${PORT}`);
-  });
-
-  // Handle graceful shutdown
-  process.on('SIGINT', () => {
-    console.log('Shutting down MCP server...');
-    server.close(() => {
-      process.exit(0);
+  console.log('Starting Emacs MCP Server...');
+  try {
+    const server = app.listen(PORT, '0.0.0.0', () => {
+      console.log(`MCP server listening on http://localhost:${PORT}`);
     });
-  });
+
+    // Output server status
+    console.log(`Server object created: ${!!server}`);
+    
+    // Handle graceful shutdown
+    process.on('SIGINT', () => {
+      console.log('Shutting down MCP server...');
+      server.close(() => {
+        process.exit(0);
+      });
+    });
+  } catch (error) {
+    console.error('Error starting server:', error);
+  }
 }
