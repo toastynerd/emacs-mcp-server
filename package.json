@@ -1,0 +1,33 @@
+{
+  "name": "emacs-mcp-server",
+  "version": "1.0.0",
+  "description": "A server that allows Claude Code to communicate with and control a running Emacs instance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --coverage",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toastynerd/emacs-mcp-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/toastynerd/emacs-mcp-server/issues"
+  },
+  "homepage": "https://github.com/toastynerd/emacs-mcp-server#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1"
+  }
+}
