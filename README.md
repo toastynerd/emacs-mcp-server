@@ -35,8 +35,11 @@ The server will be available at http://localhost:3000.
 # Start with auto-reload
 npm run dev
 
-# Run tests
+# Run unit tests
 npm test
+
+# Test Emacs integration
+npm run test:emacs
 ```
 
 ## Requirements
