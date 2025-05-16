@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  emacs-mcp-server:
+    build: .
+    container_name: emacs-mcp-server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    # For connecting to Emacs running on the host
+    network_mode: "host"
+    volumes:
+      # Mount home directory to access Emacs server socket
+      - ${HOME}:${HOME}
+      # Mount projects directory (if needed)
+      - /Users/toasty/programming:/Users/toasty/programming

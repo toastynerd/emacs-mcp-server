@@ -7,7 +7,11 @@
     "test": "NODE_ENV=test jest --coverage",
     "test:watch": "NODE_ENV=test jest --watch",
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "test:emacs": "node scripts/test-emacs-control.js",
+    "docker:build": "docker-compose build",
+    "docker:start": "./scripts/docker-start.sh",
+    "docker:stop": "./scripts/docker-stop.sh"
   },
   "repository": {
     "type": "git",

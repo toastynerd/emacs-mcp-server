@@ -1,6 +1,6 @@
 # Claude Code Integration Guide
 
-This guide explains how to configure Claude Code to use the Emacs MCP Server for enhanced functionality.
+This guide explains how to use the Emacs MCP Server with Claude Code.
 
 ## Overview
 
@@ -8,45 +8,13 @@ Claude Code can be extended with Machine Code Protocol (MCP) tools that allow it
 
 ## Configuration
 
-### Registering MCP Tools with Claude Code
+For detailed configuration instructions, see [CLAUDE_CONFIG.md](CLAUDE_CONFIG.md).
 
-When using Claude Code, you'll need to register the Emacs MCP tools.
+In brief, you'll need to:
 
-#### Method 1: CLI Configuration
-
-Add the following to your Claude Code configuration:
-
-```json
-{
-  "mcp_tools": [
-    {
-      "name": "mcp__emacs_open_in_buffer",
-      "description": "Open the specified file in a new buffer in Emacs",
-      "endpoint": "http://localhost:3000/api/tools/open-in-buffer",
-      "method": "POST",
-      "required_parameters": ["file_path"],
-      "optional_parameters": []
-    },
-    {
-      "name": "mcp__emacs_open_changes_in_magit",
-      "description": "Open Magit to show git changes",
-      "endpoint": "http://localhost:3000/api/tools/open-changes-in-magit",
-      "method": "POST",
-      "required_parameters": [],
-      "optional_parameters": ["repo_path"]
-    }
-  ]
-}
-```
-
-#### Method 2: Environment Variables
-
-You can also set these configurations using environment variables:
-
-```bash
-export CLAUDE_MCP_EMACS_OPEN_BUFFER_URL="http://localhost:3000/api/tools/open-in-buffer"
-export CLAUDE_MCP_EMACS_OPEN_MAGIT_URL="http://localhost:3000/api/tools/open-changes-in-magit"
-```
+1. Start the Emacs MCP Server (either directly or via Docker)
+2. Register the MCP tools with Claude Code
+3. Ensure Emacs is running with server mode enabled
 
 ## Usage in Claude Code
 
