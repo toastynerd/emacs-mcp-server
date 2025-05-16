@@ -8,6 +8,12 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Add more verbose logging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -117,8 +123,20 @@ module.exports = app;
 if (require.main === module) {
   console.log('Starting Emacs MCP Server...');
   try {
+    console.log(`Attempting to listen on port ${PORT}...`);
+    // Log all the interfaces we're binding to
+    const { networkInterfaces } = require('os');
+    const nets = networkInterfaces();
+    console.log('Available network interfaces:');
+    for (const name of Object.keys(nets)) {
+      for (const net of nets[name]) {
+        console.log(`- ${name}: ${net.address}`);
+      }
+    }
+    
     const server = app.listen(PORT, '0.0.0.0', () => {
       console.log(`MCP server listening on http://localhost:${PORT}`);
+      console.log(`Server address info:`, server.address());
     });
 
     // Output server status
