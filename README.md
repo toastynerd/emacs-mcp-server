@@ -13,6 +13,7 @@ A server that allows Claude Code to communicate with and control a running Emacs
 - [Usage Guide](docs/USAGE.md) - How to use the server once installed
 - [Claude Code Integration](docs/CLAUDE_INTEGRATION.md) - Setting up and using the MCP tools with Claude Code
 - [Claude Configuration](docs/CLAUDE_CONFIG.md) - Configuring Claude Code to use the MCP tools
+- [Simplified Approach](SIMPLIFIED_APPROACH.md) - A simpler shell script-based approach (recommended)
 
 ## Quick Start
 
