@@ -1,23 +1,25 @@
 {
   "name": "emacs-mcp-server",
   "version": "1.0.0",
-  "description": "A server that allows Claude Code to communicate with and control a running Emacs instance.",
+  "description": "A server that allows Claude Code to communicate with and control a running Emacs instance using the Model Context Protocol.",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test jest --coverage",
     "test:watch": "NODE_ENV=test jest --watch",
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test:emacs": "node scripts/test-emacs-control.js",
-    "docker:build": "docker-compose build",
-    "docker:start": "./scripts/docker-start.sh",
-    "docker:stop": "./scripts/docker-stop.sh"
+    "direct": "node src/direct-tool.js",
+    "test:emacs": "node scripts/test-emacs-direct.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/toastynerd/emacs-mcp-server.git"
   },
-  "keywords": [],
+  "keywords": [
+    "emacs",
+    "mcp",
+    "claude"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
@@ -26,9 +28,8 @@
   },
   "homepage": "https://github.com/toastynerd/emacs-mcp-server#readme",
   "dependencies": {
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "jest": "^29.7.0",

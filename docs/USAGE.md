@@ -1,8 +1,8 @@
-# Emacs MCP Server Usage Guide
+# Emacs MCP Tools Usage Guide
 
 ## Overview
 
-The Emacs MCP Server allows Claude Code to communicate with and control your running Emacs instance. This guide covers installation, setup, and usage of the server.
+The Emacs MCP Tools allow Claude Code to communicate with and control your running Emacs instance using the Model Context Protocol (MCP). This guide covers usage of the tools.
 
 ## Prerequisites
 
@@ -10,120 +10,56 @@ The Emacs MCP Server allows Claude Code to communicate with and control your run
 - npm (v6.0.0 or higher)
 - Emacs (with server mode enabled)
 - Magit (for Git functionality)
+- Claude Code CLI
 
-## Installation
+## Available Tools
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/toastynerd/emacs-mcp-server.git
-   cd emacs-mcp-server
-   ```
+The MCP tools provide the following functionality:
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### open_in_buffer
 
-## Setup
+Opens a file in a new Emacs buffer.
 
-### Configure Emacs Server Mode
+**Parameters:**
+- `file_path` (required): Absolute path to the file to open
 
-Ensure that Emacs server mode is enabled. Add the following to your Emacs configuration file (`~/.emacs`, `~/.emacs.d/init.el`, or equivalent):
+### open_magit
 
-```elisp
-;; Start server if not already running
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+Opens Magit to show Git changes.
+
+**Parameters:**
+- `repo_path` (optional): Path to the Git repository (defaults to current directory)
+
+### check_server
+
+Checks if the Emacs server is running.
+
+**Parameters:**
+- None
+
+## Using the Tools with Claude Code
+
+Once the tools are registered with Claude Code, you can use them in two ways:
+
+### 1. Direct Commands
+
+You can manually trigger the tools using the `/mcp` command in Claude Code:
+
+```
+/mcp emacs-mcp-open file_path="/path/to/your/file.txt"
+/mcp emacs-mcp-magit repo_path="/path/to/your/repo"
+/mcp emacs-mcp-check
 ```
 
-### Start the MCP Server
+### 2. Letting Claude Use the Tools
 
-From the project directory, run:
+When you ask Claude to perform a task that involves Emacs, it will automatically use the appropriate tool:
 
-```bash
-npm start
 ```
-
-This will start the server on port 3000 (or the port specified in the `PORT` environment variable).
-
-For development with auto-restart:
-
-```bash
-npm run dev
+User: Please open the README.md file in Emacs
+Claude: I'll open the README.md file in Emacs for you.
+[Claude uses the emacs-mcp-open tool]
 ```
-
-## Usage
-
-The MCP server exposes the following API endpoints:
-
-### Health Check
-
-Check if the server is running:
-
-```bash
-curl http://localhost:3000/health
-```
-
-Expected response:
-```json
-{
-  "status": "ok",
-  "message": "MCP server is running"
-}
-```
-
-### Open in Buffer
-
-Open a file in Emacs:
-
-```bash
-curl -X POST http://localhost:3000/api/tools/open-in-buffer \
-  -H "Content-Type: application/json" \
-  -d '{"file_path": "/path/to/your/file.txt"}'
-```
-
-Expected response:
-```json
-{
-  "status": "success",
-  "message": "File opened in Emacs: /path/to/your/file.txt",
-  "data": {
-    "result": "..."
-  }
-}
-```
-
-### Open Changes in Magit
-
-Open Magit to show Git changes:
-
-```bash
-curl -X POST http://localhost:3000/api/tools/open-changes-in-magit \
-  -H "Content-Type: application/json" \
-  -d '{"repo_path": "/path/to/your/repo"}'
-```
-
-If `repo_path` is omitted, the current working directory will be used.
-
-Expected response:
-```json
-{
-  "status": "success",
-  "message": "Magit opened for repository: /path/to/your/repo",
-  "data": {
-    "result": "..."
-  }
-}
-```
-
-## Integration with Claude Code
-
-To use this MCP server with Claude Code, add the following configuration to your Claude Code setup:
-
-1. Register the MCP tools in Claude's configuration
-2. Configure URLs pointing to your MCP server endpoints
-3. Test the integration using Claude Code's MCP command interface
 
 ## Troubleshooting
 
@@ -132,14 +68,20 @@ To use this MCP server with Claude Code, add the following configuration to your
 1. **Cannot connect to Emacs server**
    - Ensure Emacs is running with server mode enabled
    - Check the server socket location with `(server-socket-dir)` in Emacs
+   - Test emacsclient with: `emacsclient -e "(+ 1 2)"`
 
-2. **MCP server not responding**
-   - Verify the server is running with `curl http://localhost:3000/health`
-   - Check the server logs for errors
-
-3. **File not opening in Emacs**
+2. **File not opening in Emacs**
    - Ensure the file path is absolute and accessible
-   - Check Emacs server logs for errors
+   - Check tool logs in `/tmp/emacs-mcp-direct.log`
+   - Verify the file permissions allow access
+
+3. **MCP Tool Not Connected**
+   - Check the status with `claude mcp list`
+   - Try removing and re-adding the tool: 
+     ```bash
+     claude mcp remove emacs-mcp-open
+     claude mcp add emacs-mcp-open /path/to/emacs-mcp-server/src/direct-tool.js
+     ```
 
 ### Getting Help
 
