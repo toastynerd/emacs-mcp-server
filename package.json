@@ -1,15 +1,11 @@
 {
-  "name": "emacs-mcp-server",
+  "name": "emacs-mcp-direct",
   "version": "1.0.0",
-  "description": "A server that allows Claude Code to communicate with and control a running Emacs instance using the Model Context Protocol.",
-  "main": "index.js",
+  "description": "Direct MCP tools that allow Claude Code to communicate with and control a running Emacs instance.",
+  "main": "src/direct-tool.js",
   "scripts": {
     "test": "NODE_ENV=test jest --coverage",
-    "test:watch": "NODE_ENV=test jest --watch",
-    "start": "node index.js",
-    "dev": "node --watch index.js",
-    "direct": "node src/direct-tool.js",
-    "test:emacs": "node scripts/test-emacs-direct.js"
+    "test:watch": "NODE_ENV=test jest --watch"
   },
   "repository": {
     "type": "git",
@@ -32,7 +28,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "supertest": "^7.1.1"
+    "jest": "^29.7.0"
   }
 }

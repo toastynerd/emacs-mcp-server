@@ -192,6 +192,49 @@ const createServer = () => {
     }
   );
   
+  // Add 'list_tools' endpoint to provide information about available tools
+  server.tool(
+    'list_tools',
+    {},
+    async () => {
+      try {
+        log('Listing available tools');
+        
+        // Get information about each tool
+        const toolsInfo = [
+          {
+            name: 'open_in_buffer',
+            description: 'Opens the specified file in a new buffer in Emacs',
+            parameters: { file_path: 'Absolute path to the file to open in Emacs' }
+          },
+          {
+            name: 'open_magit',
+            description: 'Opens Magit to show Git changes',
+            parameters: { repo_path: 'Path to the Git repository (defaults to current directory)' }
+          },
+          {
+            name: 'check_server',
+            description: 'Checks if the Emacs server is running',
+            parameters: {}
+          },
+          {
+            name: 'list_tools',
+            description: 'Lists all available tools in this MCP server',
+            parameters: {}
+          }
+        ];
+        
+        return {
+          content: [{ type: 'text', text: 'Available tools in emacs-mcp:' }],
+          metadata: { tools: toolsInfo }
+        };
+      } catch (error) {
+        log(`Error listing tools: ${error.message}`);
+        throw new Error(`Failed to list tools: ${error.message || error}`);
+      }
+    }
+  );
+  
   return server;
 };
 

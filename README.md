@@ -46,14 +46,8 @@ This allows Claude to access repository documentation and code context through t
 ## Development
 
 ```bash
-# Run a direct tool for testing
-npm run direct
-
 # Run unit tests
 npm test
-
-# Test Emacs integration
-npm run test:emacs
 ```
 
 ## Requirements

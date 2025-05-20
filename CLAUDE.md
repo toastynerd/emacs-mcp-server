@@ -19,6 +19,10 @@ Direct MCP tools that allow Claude Code to communicate with and control a runnin
   - No parameters
   - Usage: For verifying Emacs server status
 
+* **emacs-mcp-list** - Lists all available tools in this MCP server
+  - No parameters
+  - Usage: For discovering available tools and their parameters
+
 # Complementary Tools
 * **git-mcp** - For repository access and documentation exploration
   - Usage: Allows Claude to read repository files and documentation
@@ -35,6 +39,7 @@ npm install
 claude mcp add emacs-mcp-open /Users/toasty/programming/emacs-mcp-server/src/direct-tool.js
 claude mcp add emacs-mcp-magit /Users/toasty/programming/emacs-mcp-server/src/direct-tool.js
 claude mcp add emacs-mcp-check /Users/toasty/programming/emacs-mcp-server/src/direct-tool.js
+claude mcp add emacs-mcp-list /Users/toasty/programming/emacs-mcp-server/src/direct-tool.js
 ```
 
 Replace the paths with the absolute path to your repository.
@@ -44,6 +49,7 @@ Replace the paths with the absolute path to your repository.
 /mcp emacs-mcp-open file_path="/path/to/your/file.txt"
 /mcp emacs-mcp-magit repo_path="/path/to/your/repo"
 /mcp emacs-mcp-check
+/mcp emacs-mcp-list
 ```
 
 # Logs and Debugging
