@@ -1,0 +1,22 @@
+# Tests
+__tests__
+*.test.js
+test
+tests
+coverage
+
+# Development files
+.github
+.git
+.gitignore
+.eslintrc
+.prettierrc
+.vscode
+.DS_Store
+*.log
+SESSION.md
+TODO.md
+DESIGN.md
+
+# Documentation that doesn't need to be published
+docs/

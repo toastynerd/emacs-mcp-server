@@ -1,11 +1,18 @@
 {
-  "name": "emacs-mcp-direct",
+  "name": "emacs-mcp-server",
   "version": "1.0.0",
   "description": "Direct MCP tools that allow Claude Code to communicate with and control a running Emacs instance.",
   "main": "src/direct-tool.js",
+  "bin": {
+    "emacs-mcp-open": "src/direct-tool.js",
+    "emacs-mcp-magit": "src/direct-tool.js",
+    "emacs-mcp-check": "src/direct-tool.js",
+    "emacs-mcp-list": "src/direct-tool.js"
+  },
   "scripts": {
     "test": "NODE_ENV=test jest --coverage",
-    "test:watch": "NODE_ENV=test jest --watch"
+    "test:watch": "NODE_ENV=test jest --watch",
+    "prepare": "npm test"
   },
   "repository": {
     "type": "git",
@@ -14,15 +21,22 @@
   "keywords": [
     "emacs",
     "mcp",
-    "claude"
+    "claude",
+    "claude-code",
+    "model-context-protocol",
+    "ai",
+    "magit"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Tyler Morgan <toastycodes1@gmail.com>",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/toastynerd/emacs-mcp-server/issues"
   },
   "homepage": "https://github.com/toastynerd/emacs-mcp-server#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
     "zod": "^3.22.4"

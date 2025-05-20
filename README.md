@@ -7,16 +7,37 @@ Direct MCP tools that allow Claude Code to communicate with and control a runnin
 - Open specified files in Emacs buffers
 - Open git changes in Magit
 - Check Emacs server status
+- List available tools
 - Modern MCP SDK integration using direct tools approach
 - Complementary to git-mcp for repository access
 
-## Documentation
+## Installation
 
-- [Usage Guide](docs/USAGE.md) - How to use the tools once installed
-- [Claude Code Integration](docs/CLAUDE_INTEGRATION.md) - Setting up and using the MCP tools with Claude Code
-- [Claude Configuration](docs/CLAUDE_CONFIG.md) - Configuring Claude Code to use the MCP tools
+You can install this package via npm:
 
-## Quick Start
+```bash
+# Global installation (recommended)
+npm install -g emacs-mcp-server
+
+# Local installation
+npm install emacs-mcp-server
+```
+
+## Setup with Claude Code
+
+Once installed, you can add the MCP tools to Claude Code:
+
+```bash
+# Register tools with Claude Code
+claude mcp add emacs-mcp-open emacs-mcp-open
+claude mcp add emacs-mcp-magit emacs-mcp-magit
+claude mcp add emacs-mcp-check emacs-mcp-check
+claude mcp add emacs-mcp-list emacs-mcp-list
+```
+
+### Manual Setup (Development)
+
+For development or manual setup:
 
 ```bash
 # Clone the repository
@@ -30,6 +51,7 @@ npm install
 claude mcp add emacs-mcp-open ./src/direct-tool.js
 claude mcp add emacs-mcp-magit ./src/direct-tool.js
 claude mcp add emacs-mcp-check ./src/direct-tool.js
+claude mcp add emacs-mcp-list ./src/direct-tool.js
 ```
 
 ### Adding Git MCP (Recommended)
@@ -42,6 +64,19 @@ claude mcp add --transport sse git-mcp https://gitmcp.io/idosal/git-mcp
 ```
 
 This allows Claude to access repository documentation and code context through the Model Context Protocol.
+
+## Usage
+
+After installation, you can use the MCP tools with Claude Code:
+
+```
+/mcp emacs-mcp-open file_path="/path/to/your/file.txt"
+/mcp emacs-mcp-magit repo_path="/path/to/your/repo"
+/mcp emacs-mcp-check
+/mcp emacs-mcp-list
+```
+
+For more details, see [CLAUDE.md](CLAUDE.md).
 
 ## Development
 
@@ -60,7 +95,7 @@ npm test
 
 ## License
 
-ISC
+MIT
 
 ## Contributing
 
