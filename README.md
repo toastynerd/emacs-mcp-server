@@ -89,7 +89,7 @@ npm test
 
 ## Requirements
 
-- Node.js (v14+)
+- Node.js (v16+)
 - npm (v6+)
 - Emacs with server mode enabled (`M-x server-start`)
 - Magit (for Git functionality)
