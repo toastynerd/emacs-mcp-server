@@ -6,8 +6,8 @@ tests
 coverage
 
 # Development files
-.github
-.git
+.github/
+.git/
 .gitignore
 .eslintrc
 .prettierrc
