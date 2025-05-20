@@ -1,5 +1,7 @@
 # Emacs MCP Tools
 
+[![Node.js Tests](https://github.com/toastynerd/emacs-mcp-server/actions/workflows/node-tests.yml/badge.svg)](https://github.com/toastynerd/emacs-mcp-server/actions/workflows/node-tests.yml)
+
 Direct MCP tools that allow Claude Code to communicate with and control a running Emacs instance using the Model Context Protocol.
 
 ## Features
